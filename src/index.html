@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Buttonz</title>
+   	<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyDl-FSNk7VLqjGuUKp6A9pG-JYN4PHvI6E",
+	    authDomain: "buttonz-3f19b.firebaseapp.com",
+	    databaseURL: "https://buttonz-3f19b.firebaseio.com",
+	    projectId: "buttonz-3f19b",
+	    storageBucket: "buttonz-3f19b.appspot.com",
+	    messagingSenderId: "1067610283968"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+	<script>
+		function createSoundEffects(){
+			var sounds = [];
+ 			for(i = 0; i <= 10; i++){
+ 				sounds[i] = document.getElementById(i);
+ 				console.log(sounds[i]);
+ 			}
+ 		}
+	</script>
+	<script>
+		var database = firebase.database();
+		database.ref().update({"currently-playing":"test"});
+	</script>
+  </head>
+  <body onload="createSoundEffects();">
+  	<!-- Audio and Buttons -->
+  	<!-- Throw Snowball -->
+  	<audio src="../audio/throw-snowball.wav" preload="auto" id="0"></audio>	
+  	<img src="../img/throw-snowball.png" width="200" onClick="console.log('Test')">
+  </body>
+</html>
