@@ -26,7 +26,7 @@
 		function createSoundEffects(){
  			for(i = 0; i <= 10; i++){
  				sounds[i] = document.getElementById("wav" + i);
- 				console.log(sounds[0]);
+ 				console.log(sounds);
  			}
  		}
  		function updateOnClick(){
@@ -35,7 +35,7 @@
  		}
  		database.ref().child("currently-playing").on("value", function(snap){
  			document.getElementById("wav" + snap.val()).play();
- 			var waitASec = setTimeout(function(){database.ref().set({"currently-playing": "none"});}, 1000);
+ 			var waitASec = setTimeout(function(){database.ref().set({"currently-playing": "none"});}, 4000);
  		})
 	</script>
 	<script>
@@ -46,5 +46,8 @@
   	<!-- Throw Snowball -->
   	<audio src="../audio/throw-snowball.wav" preload="auto" id="wav0"></audio>	
   	<img src="../img/throw-snowball.png" width="200" onClick="updateOnClick()" id="0">
+  	<!-- REEEEEEEEE -->
+  	<audio src="../audio/reeee.mp3" preload="auto" id="wav1"></audio>
+  	<img src="../img/reeee.png" width="200" onClick="updateOnClick()" id="1">
   </body>
 </html>
