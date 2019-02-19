@@ -21,7 +21,7 @@
 	<script>
 		var database = firebase.database();
 		var sounds = [];
-		database.ref().set({"currently-playing": "none"});
+		database.ref().update({"currently-playing": "none"});
 
 		function createSoundEffects(){
  			for(i = 0; i <= 10; i++){
@@ -31,12 +31,16 @@
  		}
  		function updateOnClick(){
  			var buttonID = event.srcElement.id;
- 			database.ref().set({"currently-playing": [buttonID]});
+ 			database.ref().update({"currently-playing": [buttonID]});
  		}
  		database.ref().child("currently-playing").on("value", function(snap){
  			document.getElementById("wav" + snap.val()).play();
- 			var waitASec = setTimeout(function(){database.ref().set({"currently-playing": "none"});}, 4000);
+ 			var waitASec = setTimeout(function(){database.ref().update({"currently-playing": "none"});}, 4000);
  		})
+ 			database.ref().child("tts").on("value", function(snap){
+ 				responsiveVoice.speak(snap.val(), "UK English Female");
+
+ 			})
 	</script>
 	<script>
 	</script>
