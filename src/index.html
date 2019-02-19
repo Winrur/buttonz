@@ -19,23 +19,32 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 	<script>
+		var database = firebase.database();
+		var sounds = [];
+		database.ref().set({"currently-playing": "none"});
+
 		function createSoundEffects(){
-			var sounds = [];
  			for(i = 0; i <= 10; i++){
- 				sounds[i] = document.getElementById(i);
- 				console.log(sounds[i]);
+ 				sounds[i] = document.getElementById("wav" + i);
+ 				console.log(sounds[0]);
  			}
  		}
+ 		function updateOnClick(){
+ 			var buttonID = event.srcElement.id;
+ 			database.ref().set({"currently-playing": [buttonID]});
+ 		}
+ 		database.ref().child("currently-playing").on("value", function(snap){
+ 			document.getElementById("wav" + snap.val()).play();
+ 			var waitASec = setTimeout(function(){database.ref().set({"currently-playing": "none"});}, 1000);
+ 		})
 	</script>
 	<script>
-		var database = firebase.database();
-		database.ref().update({"currently-playing":"test"});
 	</script>
   </head>
   <body onload="createSoundEffects();">
   	<!-- Audio and Buttons -->
   	<!-- Throw Snowball -->
-  	<audio src="../audio/throw-snowball.wav" preload="auto" id="0"></audio>	
-  	<img src="../img/throw-snowball.png" width="200" onClick="console.log('Test')">
+  	<audio src="../audio/throw-snowball.wav" preload="auto" id="wav0"></audio>	
+  	<img src="../img/throw-snowball.png" width="200" onClick="updateOnClick()" id="0">
   </body>
 </html>
